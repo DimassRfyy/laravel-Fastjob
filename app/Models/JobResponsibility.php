@@ -10,4 +10,8 @@ class JobResponsibility extends Model
         'company_job_id',
         'name',
     ];
+
+    public function companyJob() {
+        return $this->belongsTo(CompanyJob::class);
+    }
 }

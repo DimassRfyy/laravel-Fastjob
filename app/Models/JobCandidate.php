@@ -13,4 +13,11 @@ class JobCandidate extends Model
         'message',
         'is_hired',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    public function companyJob() {
+        return $this->belongsTo(CompanyJob::class);
+    }
 }
