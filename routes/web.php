@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompanyJobController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('employer')->name('employer.')->group(function() {
         Route::resource('company', CompanyController::class)->middleware('can:manage company jobs');
+        Route::resource('companyJobs', CompanyJobController::class)->middleware('can:manage company jobs');
     });
 });
 
