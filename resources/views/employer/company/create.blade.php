@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Update Category') }}
+            {{ __('New Company') }}
         </h2>
     </x-slot>
 
@@ -17,29 +17,37 @@
                     @endforeach
                 @endif
                 
-                <form method="POST" action="{{ route('admin.categories.update', $category) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('employer.company.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
-
+                
+                    <!-- Input Name -->
                     <div>
                         <x-input-label for="name" :value="__('Name')" />
-                        <x-text-input value='{{ $category->name }}' id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+                
+                    <!-- Input logo -->
+                    <div class="mt-4">
+                        <x-input-label for="logo" :value="__('Logo')" />
+                        <x-text-input id="logo" class="block mt-1 w-full" type="file" name="logo" required autofocus autocomplete="logo" />
+                        <x-input-error :messages="$errors->get('logo')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <x-input-label for="icon" :value="__('Icon')" />
-                        <x-text-input id="icon" class="block mt-1 w-full" type="file" name="icon" autofocus autocomplete="icon" />
-                        <x-input-error :messages="$errors->get('icon')" class="mt-2" />
+                        <x-input-label for="about" :value="__('About')" />
+                        <x-text-input id="about" class="block mt-1 w-full" type="text" name="about" required autofocus autocomplete="about" />
+                        <x-input-error :messages="$errors->get('about')" class="mt-2" />
                     </div>
-
+                
+                    <!-- Submit Button -->
                     <div class="flex items-center justify-end mt-4">
-            
                         <button type="submit" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
-                            Update Category
+                            Add New Company
                         </button>
                     </div>
                 </form>
+                
 
             </div>
         </div>

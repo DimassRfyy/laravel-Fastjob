@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->name('admin.')->middleware('can:manage categories')->group(function() {
         Route::resource('categories', CategoryController::class);
+    });
+
+    Route::prefix('employer')->name('employer.')->group(function() {
+        Route::resource('company', CompanyController::class)->middleware('can:manage company jobs');
     });
 });
 
