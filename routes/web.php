@@ -5,10 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyJobController;
+use App\Http\Controllers\FrontController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[FrontController::class,'index'])->name('front.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
