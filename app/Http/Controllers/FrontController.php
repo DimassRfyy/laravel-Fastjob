@@ -15,4 +15,20 @@ class FrontController extends Controller
         $companyJobs = CompanyJob::all();
         return view('front.index', compact('categories','companyJobs','user'));
     }
+    public function search(Request $request) {
+        $user = Auth::user();
+        $categories = Category::all();
+        $query = $request->input('query');
+
+        $companyJobs = CompanyJob::where('name', 'like', '%' . $query . '%')
+            ->orWhereHas('category', function($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->orWhereHas('company', function($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->get();
+
+        return view('front.search', compact('categories', 'companyJobs', 'user', 'query'));
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyJobController;
 use App\Http\Controllers\FrontController;
 
 Route::get('/',[FrontController::class,'index'])->name('front.index');
+Route::get('/search', [FrontController::class, 'search'])->name('front.search');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
