@@ -37,7 +37,7 @@
         <div class="flex items-center gap-4">
             <p class="username font-medium text-white">Hi, {{ $user->name }}</p>
             <a href="{{ route('dashboard') }}" class="w-[52px] h-[52px] flex shrink-0 rounded-full overflow-hidden">
-                <img src="{{ $user->avatar }}" class="object-cover w-full h-full" alt="photo">
+                <img src="{{ Storage::url($user->avatar) }}" class="object-cover w-full h-full" alt="photo">
             </a>
         </div>
         @else

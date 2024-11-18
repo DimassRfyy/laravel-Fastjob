@@ -18,10 +18,11 @@ class CompanyJobController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $companyJobs = Auth::user()->company->companyJobs;
-        return view('employer.companyJobs.index', compact('companyJobs'));
-    }
+{
+    $user = Auth::user();
+    $companyJobs = $user->company ? $user->company->companyJobs : collect();
+    return view('employer.companyJobs.index', compact('companyJobs', 'user'));
+}
 
     /**
      * Show the form for creating a new resource.

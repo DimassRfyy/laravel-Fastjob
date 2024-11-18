@@ -33,17 +33,32 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'avatar' => ['required', 'image', 'mimes:jpg,png,jpeg,gif,svg'],
+            'occupation' => ['required', 'string', 'max:255'],
+            'experience' => ['required', 'integer', 'max:255'],
         ]);
 
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('avatars','public');
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'avatar' => $avatarPath,
+            'occupation' => $request->occupation,
+            'experience' => $request->experience,
         ]);
+
+        $user->assignRole($request->role);
 
         event(new Registered($user));
 
         Auth::login($user);
+
+        if($user->hasRole('employee')) {
+            return redirect(route('front.index', absolute: false));
+        }
 
         return redirect(route('dashboard', absolute: false));
     }

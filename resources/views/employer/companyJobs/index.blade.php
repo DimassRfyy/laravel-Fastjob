@@ -4,16 +4,17 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Manage Company Jobs') }}
             </h2>
+            @if ($user->company)
             <a href="{{ route('employer.companyJobs.create') }}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                 Add New
             </a>
+            @endif
         </div>
     </x-slot>
     
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-10 flex flex-col gap-y-5">
-                
                 @forelse ($companyJobs as $companyJob)
                 <div class="item-card flex flex-col md:flex-row gap-y-10 justify-between md:items-center">
                     <div class="flex flex-row items-center gap-x-3">
@@ -42,7 +43,7 @@
                     </div>
                 </div>
                 @empty
-                    <p>Belum ada Jobs</p>
+                    <p>Buat Company Terlebih dahulu dan tambahkan Jobs Anda</p>
                 @endforelse
                 
                 
