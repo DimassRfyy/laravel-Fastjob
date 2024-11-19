@@ -21,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/apply/{companyJob:slug}', [FrontController::class, 'apply'])->name('front.apply');
+    Route::post('/apply/store/{companyJob:id}', [FrontController::class, 'store_apply'])->name('front.store_apply');
+
     Route::prefix('admin')->name('admin.')->middleware('can:manage categories')->group(function() {
         Route::resource('categories', CategoryController::class);
     });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\CompanyJob;
+use App\Models\JobCandidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,5 +41,29 @@ class FrontController extends Controller
     public function details(CompanyJob $companyJob) {
         $jobRandom = CompanyJob::where('id', '!=', $companyJob->id)->inRandomOrder()->limit(8)->get();
         return view('front.details', compact('companyJob', 'jobRandom'));
+    }
+
+    public function apply(CompanyJob $companyJob) {
+        return view('front.apply', compact('companyJob'));
+    }
+
+    public function store_apply(Request $request, CompanyJob $companyJob) {
+        $validate = $request->validate([
+            'resume' => 'required|mimes:pdf,docx|max:2000',
+            'message' => 'required|string',
+        ]);
+    
+        if ($request->hasFile('resume')) {
+            $resumePath = $request->file('resume')->store('resumes', 'public');
+            $validate['resume'] = $resumePath;
+        }
+    
+        $validate['user_id'] = Auth::id();
+        $validate['company_job_id'] = $companyJob->id;
+        $validate['is_hired'] = false;
+
+        JobCandidate::create($validate);
+    
+        return view('front.success');
     }
 }

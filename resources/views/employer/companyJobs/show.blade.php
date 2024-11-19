@@ -106,7 +106,7 @@
                         @endif
 
                         <div class="flex flex-row items-center gap-x-3">
-                            <a href="{{ route('employer.candidates.show', $candidate) }}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                            <a href="" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                                 Details
                             </a>
                         </div>
