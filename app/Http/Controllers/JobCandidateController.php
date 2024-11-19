@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobCandidate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobCandidateController extends Controller
 {
@@ -12,7 +13,8 @@ class JobCandidateController extends Controller
      */
     public function index()
     {
-        //
+        $jobApplications = JobCandidate::where('user_id', Auth::user()->id)->get();
+        return view('employee.applications.index', compact('jobApplications'));
     }
 
     /**

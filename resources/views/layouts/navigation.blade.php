@@ -16,6 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                @role('employee')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('employee.applications.index')" :active="request()->routeIs('employee.applications.index')">
+                        {{ __('My Job Applications') }}
+                    </x-nav-link>
+                </div>
+                @endrole
                 @role('admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
@@ -23,6 +30,7 @@
                     </x-nav-link>
                 </div>
                 @endrole
+                @role('employer')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('employer.company.index')" :active="request()->routeIs('employer.company.index')">
                         {{ __('My Company') }}
@@ -33,6 +41,7 @@
                         {{ __('My Jobs') }}
                     </x-nav-link>
                 </div>
+                @endrole
             </div>
 
             <!-- Settings Dropdown -->

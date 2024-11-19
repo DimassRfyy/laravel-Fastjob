@@ -91,15 +91,15 @@
                             </div>
                         </div>
 
-                        @if($candidate->is_hired == true)
+                        @if($candidate->is_hired === 1)
                             <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-green-500 text-white">
                                 HIRED
                             </span>
-                        @elseif($candidate->status == null)
+                        @elseif($candidate->is_hired === null)
                             <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
                                 WAITING FOR APPROVAL
                             </span> 
-                        @elseif($candidate->status == false)
+                        @elseif($candidate->is_hired === 0)
                             <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-red-500 text-white">
                                 REJECTED
                             </span>

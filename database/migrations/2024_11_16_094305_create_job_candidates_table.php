@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('company_job_id')->constrained()->cascadeOnDelete();
             $table->string('resume');
             $table->text('message');
-            $table->boolean('is_hired')->default(false);
+            $table->boolean('is_hired')->nullable();
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyJobController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\JobCandidateController;
 
 Route::get('/',[FrontController::class,'index'])->name('front.index');
 Route::get('/search', [FrontController::class, 'search'])->name('front.search');
@@ -31,6 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('employer')->name('employer.')->group(function() {
         Route::resource('company', CompanyController::class)->middleware('can:manage company jobs');
         Route::resource('companyJobs', CompanyJobController::class)->middleware('can:manage company jobs');
+    });
+
+    Route::prefix('employee')->name('employee.')->group(function() {
+        Route::resource('applications', JobCandidateController::class)->middleware('can:manage job applications');
     });
 });
 

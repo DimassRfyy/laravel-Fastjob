@@ -60,7 +60,7 @@ class FrontController extends Controller
     
         $validate['user_id'] = Auth::id();
         $validate['company_job_id'] = $companyJob->id;
-        $validate['is_hired'] = false;
+        $validate['is_hired'] = null;
 
         JobCandidate::create($validate);
     
