@@ -43,7 +43,7 @@
         <h2 class="font-bold text-2xl leading-[36px] text-white">Browse by <br> Job Categories</h2>
         <div class="categories-container grid grid-cols-4 gap-[30px]">
            @foreach ($categories as $category)
-                <a href="" class="card">
+                <a href="{{ route('front.category', $category->slug) }}" class="card">
                 <div class="flex flex-col rounded-[20px] border border-[#E8E4F8] p-5 gap-[30px] bg-white shadow-[0_8px_30px_0_#0E01400D] hover:ring-2 hover:ring-[#FF6B2C] transition-all duration-300">
                     <div class="w-[60px] h-[60px] flex shrink-0">
                         <img src="{{ Storage::url($category->icon) }}" class="object-contain rounded-full" alt="icon">

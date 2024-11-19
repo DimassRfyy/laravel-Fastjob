@@ -32,6 +32,11 @@ class FrontController extends Controller
         return view('front.search', compact('categories', 'companyJobs', 'user', 'query'));
     }
 
+    public function category(Category $category) {
+        $companyJobs = $category->companyJobs()->paginate(4);
+        return view('front.category', compact('category','companyJobs'));
+    }
+
     public function details(CompanyJob $companyJob) {
         $jobRandom = CompanyJob::where('id', '!=', $companyJob->id)->inRandomOrder()->limit(8)->get();
         return view('front.details', compact('companyJob', 'jobRandom'));

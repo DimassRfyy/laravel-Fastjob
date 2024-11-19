@@ -100,7 +100,7 @@
                                 <img src="/assets/icons/verify.svg" alt="verified"> 
                             </div>
                         </div>
-                        <p class="text-sm leading-[21px]">{{ $companyJob->count() }} Jobs</p>
+                        <p class="text-sm leading-[21px]">{{ $companyJob->company->companyJobs->count() }} Jobs</p>
                     </div>
                 </div>
                 <p class="leading-[28px]">{{ $companyJob->company->about }}</p>
