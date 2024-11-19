@@ -17,6 +17,24 @@ class JobCandidateController extends Controller
         return view('employee.applications.index', compact('jobApplications'));
     }
 
+    public function approve($id)
+{
+    $jobCandidate = JobCandidate::find($id);
+    $jobCandidate->is_hired = true;
+    $jobCandidate->save();
+
+    return redirect()->back()->with('success', 'Candidate approved successfully.');
+}
+
+    public function reject($id)
+    {
+        $jobCandidate = JobCandidate::find($id);
+        $jobCandidate->is_hired = false;
+        $jobCandidate->save();
+
+        return redirect()->back()->with('success', 'Candidate rejected successfully.');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

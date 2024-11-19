@@ -6,9 +6,11 @@ use App\Http\Requests\StoreJobsRequest;
 use App\Http\Requests\UpdateJobsRequest;
 use App\Models\Category;
 use App\Models\CompanyJob;
+use App\Models\JobCandidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -71,6 +73,27 @@ class CompanyJobController extends Controller
     public function show(CompanyJob $companyJob)
     {
         return view('employer.companyJobs.show', compact('companyJob'));
+    }
+
+    public function candidate(JobCandidate $jobCandidate)
+    {
+        return view('employer.companyJobs.manageCandidate', compact('jobCandidate'));
+    }
+
+    public function downloadResume($id)
+    {
+        $candidate = JobCandidate::findOrFail($id);
+        $resumePath = storage_path('app/public/resumes/' . $candidate->resume);
+
+        Log::info('Resume Path: ' . $resumePath);
+
+        if (file_exists($resumePath)) {
+            Log::info('File exists: ' . $resumePath);
+            return response()->download($resumePath);
+        } else {
+            Log::error('Resume not found at path: ' . $resumePath);
+            return redirect()->back()->with('error', 'Resume not found.');
+        }
     }
 
     /**

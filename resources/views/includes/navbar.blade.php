@@ -12,9 +12,11 @@
         <li>
             <a href="index.html" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">Benefits</a>
         </li>
+        @role('employee')
         <li>
-            <a href="index.html" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">Stories</a>
+            <a href="{{ route('employee.applications.index') }}" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">My Applycation</a>
         </li>
+        @endrole
         <li>
             <a href="index.html" class="transition-all duration-300 hover:font-semibold hover:text-[#FF6B2C] font-medium text-white">About</a>
         </li>

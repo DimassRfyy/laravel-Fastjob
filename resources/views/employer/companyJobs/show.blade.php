@@ -81,32 +81,32 @@
                 <hr class="my-5">
                 <h3 class="text-indigo-950 text-xl font-bold">Applicants</h3>
 
-                @forelse ($companyJob->candidates as $candidate)
+                @forelse ($companyJob->candidates as $jobCandidate)
                     <div class="flex flex-row justify-between items-center">
                         <div class="flex flex-row items-center gap-x-3">
-                            <img src="{{ Storage::url($candidate->user->avatar) }}" alt="" class="rounded-full object-cover w-[70px] h-[70px]">
+                            <img src="{{ Storage::url($jobCandidate->user->avatar) }}" alt="" class="rounded-full object-cover w-[70px] h-[70px]">
                             <div class="flex flex-col">
-                                <h3 class="text-indigo-950 text-xl font-bold">{{ $candidate->user->name }}</h3>
-                                <p class="text-slate-500 text-sm">{{ $candidate->user->occupation }}</p>
+                                <h3 class="text-indigo-950 text-xl font-bold">{{ $jobCandidate->user->name }}</h3>
+                                <p class="text-slate-500 text-sm">{{ $jobCandidate->user->occupation }}</p>
                             </div>
                         </div>
 
-                        @if($candidate->is_hired === 1)
+                        @if($jobCandidate->is_hired === 1)
                             <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-green-500 text-white">
                                 HIRED
                             </span>
-                        @elseif($candidate->is_hired === null)
+                        @elseif($jobCandidate->is_hired === null)
                             <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
                                 WAITING FOR APPROVAL
                             </span> 
-                        @elseif($candidate->is_hired === 0)
+                        @elseif($jobCandidate->is_hired === 0)
                             <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-red-500 text-white">
                                 REJECTED
                             </span>
                         @endif
 
                         <div class="flex flex-row items-center gap-x-3">
-                            <a href="" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+                            <a href="{{ route('employer.companyJobs.candidate', $jobCandidate) }}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                                 Details
                             </a>
                         </div>

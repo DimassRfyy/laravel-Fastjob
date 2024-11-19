@@ -32,6 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('employer')->name('employer.')->group(function() {
         Route::resource('company', CompanyController::class)->middleware('can:manage company jobs');
         Route::resource('companyJobs', CompanyJobController::class)->middleware('can:manage company jobs');
+        Route::get('companyJobs/{jobCandidate}/candidate', [CompanyJobController::class, 'candidate'])->name('companyJobs.candidate');
+        Route::get('candidate/{id}/resume', [CompanyJobController::class, 'downloadResume'])->name('candidate.downloadResume');
+        Route::get('/candidate/{id}/approve', [JobCandidateController::class, 'approve'])->name('candidate.approve');
+        Route::get('/candidate/{id}/reject', [JobCandidateController::class, 'reject'])->name('candidate.reject');
     });
 
     Route::prefix('employee')->name('employee.')->group(function() {
